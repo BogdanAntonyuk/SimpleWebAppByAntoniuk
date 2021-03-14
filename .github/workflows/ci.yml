@@ -48,10 +48,7 @@ jobs:
 
     needs: build
     steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: Package
-        path: staging
+    - uses: actions/checkout@v2
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
