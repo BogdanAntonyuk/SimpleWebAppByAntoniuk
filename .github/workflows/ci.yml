@@ -31,7 +31,7 @@ jobs:
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
       with:
-        name: Package
+        name: target
         path: staging
 
     #    - name: Maven Package
@@ -48,7 +48,7 @@ jobs:
 
     needs: build
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
