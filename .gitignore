@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-ci-cd-project-307420-c9e5ed8f31c5.json
+./ci-cd-project-307420-c9e5ed8f31c5.json
 
 ### Maven ###
 pom.xml.tag
