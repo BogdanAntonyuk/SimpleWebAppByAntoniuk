@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SimpleController {
 
-    @GetMapping("/greet")
+    @GetMapping("/")
     public String getName(@RequestParam(name = "name", required = false, defaultValue = "to ALL!!") String name, Model model){
         model.addAttribute("name", name);
-        return "greet";
+        return "index";
     }
 }
