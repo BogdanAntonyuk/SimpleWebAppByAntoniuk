@@ -71,7 +71,7 @@ jobs:
     - name: test run
 
       run: |
-        pwd
+        pip install requests google-auth
         cd ansible/
         ansible-inventory --graph
 
