@@ -71,6 +71,7 @@ jobs:
     - name: test run
 
       run: |
+        cd ansible/
         ansible-inventory --graph
 
 
