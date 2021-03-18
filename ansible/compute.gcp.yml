@@ -1,0 +1,26 @@
+plugin: gcp_compute
+regions:
+  - europe-west3
+
+keyed_groups:
+  - key: labels
+  - key: status
+projects:
+  - ci-cd-project-307420
+
+groups:
+  prod: "'prod' in (labels|list)"
+  stage: "'stage' in (labels|list)"
+  status: "'RUNNING' in status"
+
+#status:
+
+hostnames:
+  - name
+
+compose:
+  ansible_host: networkInterfaces[0].accessConfigs[0].natIP
+
+auth_kind: serviceaccount
+
+service_account_file: ~/ansible/keys/ci-cd-project-307420-c9e5ed8f31c5.json
