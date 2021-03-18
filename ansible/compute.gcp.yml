@@ -23,4 +23,4 @@ compose:
 
 auth_kind: serviceaccount
 
-service_account_file: ~/ansible/keys/ci-cd-project-307420-c9e5ed8f31c5.json
+service_account_file: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
