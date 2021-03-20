@@ -13,29 +13,29 @@ env:
   GCE_INSTANCE_ZONE: europe-west3-c   
 
 jobs:
-   build:
+  build:
 
-     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-     steps:
-     - uses: actions/checkout@v2
-     - name: Set up JDK 11
-       uses: actions/setup-java@v1
-       with:
-         java-version: 11.0.10
-     - name: Cache Maven packages
-       uses: actions/cache@v2
-       with:
-         path: ~/.m2
-         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-         restore-keys: ${{ runner.os }}-m2
-     - name: Build with Maven
-       run: mvn --batch-mode --update-snapshots verify
-     - run: mkdir staging && cp target/*.jar staging
-     - uses: actions/upload-artifact@v2
-       with:
-         name: target
-         path: staging
+   steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11.0.10
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Build with Maven
+      run: mvn --batch-mode --update-snapshots verify
+    - run: mkdir staging && cp target/*.jar staging
+    - uses: actions/upload-artifact@v2
+      with:
+        name: target
+        path: staging
 
 
 
