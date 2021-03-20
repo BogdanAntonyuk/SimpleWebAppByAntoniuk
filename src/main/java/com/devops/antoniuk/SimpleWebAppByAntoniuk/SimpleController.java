@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SimpleController {
 
     @GetMapping("/")
-    public String getName(@RequestParam(name = "name", required = false, defaultValue = "to ALL!!") String name, Model model){
+    public String getName(@RequestParam(name = "name", required = false, defaultValue = "to colleagues") String name, Model model){
         model.addAttribute("name", name);
         return "index";
     }
