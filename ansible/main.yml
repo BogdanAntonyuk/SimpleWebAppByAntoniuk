@@ -1,2 +1,57 @@
 ---
+- name: installing Dockerand python
+  hosts: prod
+  tasks:
+    - name: preinstall packeges for docker
+      become: yes
+      
+      apt: 
+        state: present
+        name:
+        - apt-transport-https
+        - ca-certificates 
+        - curl 
+        - gnupg 
+        - lsb-release 
+        update_cache: yes
+    - name: Add Docker’s official GPG key
+      become: yes
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg --yes
+    - name: set up the stable repository (To add the nightly or test repository, add the word nightly or test (or both) after the word stable in the commands below)
+      become: yes
+      shell: echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    - name: install docker
+      become: yes
+      apt:
+        update_cache: yes
+        state: present
+        name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+#    - name: add docker group
+#      become: yes
+#      command: sudo groupadd docker
+#      ignore_errors: yes
+#    - name: add user to docker group (to be able run docker commands withot sudo)
+#      become: yes
+#      command: usermod -aG docker $USER
+#      ignore_errors: yes
 
+- name: run docker
+  gather_facts: no
+  hosts: prod
+  tasks:
+    - name: removing dangling image and stoped containers
+      become: yes
+      shell: docker system prune -f
+    - name: pulling image
+      become: yes
+      shell: docker pull bobwithb/myfirstapp
+    - name: stoping all containers
+      become: yes
+      shell: docker stop $(sudo docker ps -aq)
+      ignore_errors: yes
+    - name: running image
+      become: yes
+      shell: docker run -d -p 80:8085 --rm bobwithb/myfirstapp

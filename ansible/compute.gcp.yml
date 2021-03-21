@@ -1,26 +1,11 @@
-plugin: gcp_compute
-regions:
-  - europe-west3
-
-keyed_groups:
-  - key: labels
-  - key: status
-projects:
-  - ci-cd-project-307420
-
-groups:
-  prod: "'prod' in (labels|list)"
-  stage: "'stage' in (labels|list)"
-  status: "'RUNNING' in status"
-
-#status:
-
-hostnames:
-  - name
-
-compose:
-  ansible_host: networkInterfaces[0].accessConfigs[0].natIP
-
 auth_kind: serviceaccount
-
-service_account_file: '{{ secrets.GCP_SERVICE_ACCOUNT_FILE }}'
+compose: {ansible_host: 'networkInterfaces[0].accessConfigs[0].natIP'}
+groups: {prod: '''prod'' in (labels|list)', running: '''RUNNING'' in status', stage: '''stage''
+    in (labels|list)'}
+hostnames: [name]
+keyed_groups:
+- {key: machineType}
+plugin: gcp_compute
+projects: [ci-cd-example-308115]
+regions: [europe-west3]
+service_account_file: servisce-file.json
