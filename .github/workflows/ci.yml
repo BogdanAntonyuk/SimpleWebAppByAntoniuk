@@ -1,16 +1,16 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Java CI/CD with Maven
 on:
   push:
     branches: [ master ]
 #   pull_request:
 #     branches: [ master ]
-env:
-  PROJECT_ID: ${{ secrets.GCE_PROJECT }}
-  GCE_INSTANCE: debian10  
-  GCE_INSTANCE_ZONE: europe-west3-c   
+#env:
+#  PROJECT_ID: ${{ secrets.GCE_PROJECT }}
+#  GCE_INSTANCE: debian10
+#  GCE_INSTANCE_ZONE: europe-west3-c
 
 jobs:
   build:
@@ -92,7 +92,7 @@ jobs:
 
         pip install requests google-auth
 
-        ansible-playbook mail.yml
+        ansible-playbook main.yml
 
 
 
