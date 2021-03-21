@@ -78,7 +78,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install ansible
-    - name: test run
+    - name: Configuring and lunching ansible to download image from dockerHub and run on GCP servers with label 'prod'
       env:
         GCP_SERVICE_ACCOUNT_FILE: ${{ secrets.GCP_SERVICE_ACCOUNT_FILE }}
         GCP_SSH_USER: ${{ secrets.SSH_USER }}
