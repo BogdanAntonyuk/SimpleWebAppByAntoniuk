@@ -54,4 +54,4 @@
       ignore_errors: yes
     - name: running image
       become: yes
-      shell: docker run -d -p 80:8085 --live-restore bobwithb/myfirstapp
+      shell: docker run -d -p 80:8085 --restart unless-stopped bobwithb/myfirstapp
