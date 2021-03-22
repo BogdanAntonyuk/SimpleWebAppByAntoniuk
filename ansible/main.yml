@@ -45,6 +45,7 @@
     - name: removing dangling image and stoped containers
       become: yes
       shell: docker system prune -f
+      ignore_errors: yes
     - name: pulling image
       become: yes
       shell: docker pull bobwithb/myfirstapp
